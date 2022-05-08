@@ -3,6 +3,21 @@ window.addEventListener('load', () => {
 	const input = document.querySelector("#new-task-input");
 	const list_el = document.querySelector("#tasks");
 
+	let cache_data = localStorage.getItem("todo");
+
+	if (cache_data) {
+		list_el = JSON.parse(cache_data);
+		loadToDo(list_el);
+	}
+    else {
+		continue;
+    }
+	function loadToDo(array) {
+		array.forEach(function (item) {
+			item.task_el, item.task_actions_el, item.task_content_el, item.task_delete_el, item.task_input_el;
+		});
+    }
+
 	form.addEventListener('submit', (e) => {
 		e.preventDefault();
 
@@ -58,5 +73,7 @@ window.addEventListener('load', () => {
 		task_delete_el.addEventListener('click', (e) => {
 			list_el.removeChild(task_el);
 		});
+
+		localStorage.setItem("todo", JSON.stringify(list_el));
 	});
 });
