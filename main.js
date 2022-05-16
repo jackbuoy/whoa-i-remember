@@ -1,8 +1,11 @@
 window.addEventListener('load', () => {
-	const form = document.querySelector("#new-task-form");
-	const input = document.querySelector("#new-task-input");
-	const list_el = document.querySelector("#tasks");
-
+	const form = document.querySelector('#new-task-form');
+	const input = document.querySelector('#new-task-input');
+	const list_el = document.querySelector('#tasks');
+	const focusAfterButton = () => {
+		document.getElementById("new-task-input").focus();
+	}
+	
 	form.addEventListener('submit', (e) => {
 		e.preventDefault();
 
@@ -44,19 +47,25 @@ window.addEventListener('load', () => {
 
 		input.value = '';
 
+		focusAfterButton();
+
 		task_edit_el.addEventListener('click', (e) => {
-			if (task_edit_el.innerText.toLowerCase() == "edit") {
-				task_edit_el.innerText = "save";
-				task_input_el.removeAttribute("readonly");
+			if (task_edit_el.innerText.toLowerCase() == 'edit') {
+				task_edit_el.innerText = 'save';
+				task_input_el.removeAttribute('readonly');
 				task_input_el.focus();
 			} else {
-				task_edit_el.innerText = "edit";
-				task_input_el.setAttribute("readonly", "readonly");
+				task_edit_el.innerText = 'edit';
+				task_input_el.setAttribute('readonly', 'readonly');
+				focusAfterButton();
 			}
 		});
 
+		focusAfterButton();
+
 		task_delete_el.addEventListener('click', (e) => {
 			list_el.removeChild(task_el);
+			focusAfterButton();
 		});
 	});
 });
